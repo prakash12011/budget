@@ -1,0 +1,95 @@
+@import 'partials/variables';
+
+@mixin heading-font($font-size: $font-size) {
+    font-family: 'Bebas Neue', cursive;
+    font-size: $font-size * 2;
+    line-height: ($font-size * 2) + 5px;
+    letter-spacing: .15rem;
+}
+
+// Shaddow Mixin
+@mixin box-shaddow($bottom: 1px, $right: 1px, $blur: 2px, $opacity: .2 ) {    
+    box-shadow: $bottom $right $blur rgba(0, 0, 0, $opacity);
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.document_wrapper {
+
+    .navigation {
+        @include box-shaddow();        
+        background-color: $main-color;
+        color: $main-text-color;
+        
+        &__container {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 30px 1fr;
+            grid-gap: 20px;            
+            padding: .5rem 1rem;
+            position: relative;
+            z-index: 3;
+            
+            & .logo_container h1 {
+                @include heading-font();
+            }
+        }
+
+        &__overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            transform: translate(200%, 0);
+            transition: transform .1s ease, opacity .5s ease;
+            background-color: rgba(0, 0, 0, .2);
+            opacity: 0;
+
+            &.show{
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+        }
+
+        &__toggler {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+
+            & img {
+                max-width: 100%;
+            }
+        }
+
+        &__menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            width: 70vw;
+            max-width: 320px;
+            height: 100%;
+            background: #42b883;
+            padding: 60px 1rem 1rem;
+            transition: all .5s ease;
+            transform: translate(-100%, 0);
+
+            &.show {
+                transform: translate(0, 0);  
+            }
+
+            .main_menu {
+                list-style: none;
+            }
+        }
+
+    }
+}
